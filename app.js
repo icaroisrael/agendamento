@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const bodyParser = require('body-parser')
+const Usuario = require('./model/Usuario')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 const port = process.env.PORT || 3000
@@ -13,7 +14,12 @@ app.get('/cadastro', (req, res) => {
 })
 
 app.post('/cadastro', (req, res) => {
-    res.send("CPF: " + req.body.cpf + "<br>" + "NOME: " + req.body.nome)
+    Usuario.create({
+        cpf:req.body.cpf,
+        nome: req.body.nome
+    }).then(()=>{
+        res.send("Dados cadastrados com sucesso")
+    });
 })
 
 app.listen(port, () =>{
