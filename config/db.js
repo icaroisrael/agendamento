@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('agendamento', 'root', '', {
-    dialect: 'mysql',
+const sequelize = new Sequelize('agendamento','root','',{
     host: 'localhost',
-    port: 3306
+    dialect: 'mysql'
 })
+
 module.exports = {
     Sequelize,
     sequelize

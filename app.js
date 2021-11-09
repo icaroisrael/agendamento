@@ -2,6 +2,16 @@ const express = require('express')
 const app = express();
 const bodyParser = require('body-parser')
 const Usuario = require('./model/Usuario')
+const handlebars = require('express-handlebars')
+//CONFIGURA O HANDLEBARS
+app.engine("handlebars", handlebars({
+    defaultLayout: "main",
+    runtimeOptions: {allowProtoPropertiesByDefault: true,
+              allowProtoMethodsByDefault: true,},})
+);
+//CONTINUA CONFIRAÇÃO DO HANDLEBARS
+//app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 const port = process.env.PORT || 3000
@@ -15,11 +25,23 @@ app.get('/cadastro', (req, res) => {
 
 app.post('/cadastro', (req, res) => {
     Usuario.create({
-        cpf:req.body.cpf,
+        cpf: req.body.cpf,
         nome: req.body.nome
-    }).then(()=>{
-        res.send("Dados cadastrados com sucesso")
-    });
+    }).then(() =>{
+        res.redirect('/')
+    }) 
+})
+
+app.get('/usuarios', (req, res) => {
+    Usuario.findAll().then((dados) =>{ 
+        res.render('usuarios', {dados:dados})       
+    })   
+})
+
+app.get('/pesquisar', (req, res) =>{
+    Usuario.findAll().then((dados) =>{
+        res.render('usuarios', {usuarios:dados})
+    })
 })
 
 app.listen(port, () =>{
