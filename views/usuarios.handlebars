@@ -1,12 +1,14 @@
 <table border="1">
     <tr>
         <td>CPF</td>
-        <td>NOME</td>
-    </tr>
+        <td>NOME</td>  
+        <td>EXCLUIR</td>      
+    </tr>    
 {{#each usuarios}}
      <tr>
         <td>{{cpf}}</td>
-        <td>{{nome}}</td>
+        <td>{{nome}}</td> 
+        <td><a href="/excluir/{{cpf}}"> excluir </td>       
     </tr>
 {{/each}}
    

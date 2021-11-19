@@ -45,6 +45,14 @@ app.get('/pesquisar', (req, res) =>{
     })
 })
 
+app.get('/excluir/:cpf', (req, res) =>{
+    Usuario.destroy({
+        where:{ cpf: req.params.cpf}
+    }).then(() => {
+        res.redirect('/pesquisar')
+    })
+})
+
 app.listen(port, () =>{
     console.log("Servidor ligado")
 })
