@@ -13,6 +13,7 @@ app.engine("handlebars", handlebars({
 //app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
+//CONFIGURA O BODY-PARSER
 app.use(bodyParser.urlencoded({ extended: false }))
 const port = process.env.PORT || 3000
 
