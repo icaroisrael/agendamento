@@ -46,12 +46,29 @@ app.get('/pesquisar', (req, res) =>{
 })
 
 app.get('/excluir/:cpf', (req, res) =>{
-    Usuario.destroy({
-        where:{ cpf: req.params.cpf}
-    }).then(() => {
+    Usuario.destroy(
+        {
+            where:{cpf: req.params.cpf}
+        }
+    ).then(() => {
+        res.redirect('/pesquisar')
+    })   
+})
+
+app.post('/editar', (req, res) =>{
+    Usuario.update(
+        {nome: req.body.nome},
+        {where: {cpf: req.body.cpf}}
+    ).then(() =>{
         res.redirect('/pesquisar')
     })
 })
+
+app.get('/recebe/:cpf/:nome', (req, res) =>{
+    res.render('atualizar', {dados:{cpf:req.params.cpf, nome:req.params.nome}})
+})
+
+
 
 app.listen(port, () =>{
     console.log("Servidor ligado")
