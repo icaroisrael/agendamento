@@ -1,0 +1,17 @@
+{
+  "name": "agendamento",
+  "version": "1.0.0",
+  "description": "Sistema para o agendamento de equipamento da eeep",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Israel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.3.0",
+    "sequelize": "^6.31.1"
+  }
+}
