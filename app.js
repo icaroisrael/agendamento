@@ -1,18 +1,24 @@
 const express = require('express')
 const app = express();
 const Usuario = require('./model/Usuario')
+const bodyParser = require('body-parser')
+
+//CONFIGURAÇÕES
+app.use(bodyParser.urlencoded({ extended: false }))
 
 
 app.get('/cadastro', (req, res) =>{
-    res.send("Cadastro de usuário")
-    Usuario.create({
-    cpf: 11111111111,
-    nome: "Israel",
-    email: "ysrael@gmail.com",
-    senha: "12345"
- }).then(() =>{
-        res.redirect('/consultar')
-}) 
+    res.sendFile(__dirname + '/views/cadastro.html');
+})
+app.post('/cadastro/usuario', (req, res) => {
+     Usuario.create({
+        nome: req.body.nome,
+        cpf: req.body.cpf,
+        email: req.body.email,
+        senha: req.body.senha
+     }).then(() =>{
+        res.redirect('/cadastro')
+  }) 
 })
 
 
