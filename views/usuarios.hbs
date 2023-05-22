@@ -1,0 +1,18 @@
+<table border="1" >
+    <tr>
+        <td>NOME</td>
+        <td>CPF</td>  
+        <td>EMAIL</td>
+        <td>EXCLUIR</td>  
+        <td>EDITAR</td>    
+    </tr>    
+{{#each usuarios}}
+     <tr>
+        <td>{{nome}}</td>
+        <td>{{cpf}}</td>
+        <td>{{email}}</td>       
+        <td><a href="/excluir/{{cpf}}"> <button> excluir</button></a> </td>   
+        <td><a href="/update/{{cpf}}"> <button> EDITAR</button></a></td>    
+    </tr>
+{{/each}}   
+</table>

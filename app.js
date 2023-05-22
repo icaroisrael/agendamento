@@ -2,8 +2,18 @@ const express = require('express')
 const app = express();
 const Usuario = require('./model/Usuario')
 const bodyParser = require('body-parser')
+//INCLUE AS NOVAS BIBLIOTECAS
+const path = require('path')
+const hbs = require('hbs')
+//FIM DA INCLUSÃO DAS BIBLIOTECAS
 
-//CONFIGURAÇÕES
+
+//MUDANÇA 3 CONFIGURAÇÃO DO HANDLEBARS
+// View Engine Setup
+app.set('views', path.join('views'))
+app.set('view engine', 'hbs')
+
+
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
@@ -21,10 +31,13 @@ app.post('/cadastro/usuario', (req, res) => {
   }) 
 })
 
-
-app.get('/consultar', (req, res) =>{
-    res.send("Pesquisar usuário")
+//INCLUE NA VERSÃO NOVA A PESQUISA USANDO O HANDLEBARS
+app.get('/pesquisar', (req, res) =>{
+    Usuario.findAll().then((dados) =>{
+        res.render('usuarios', {usuarios:dados})
+    })
 })
+//
 
 app.listen(3000, ()=>{
     console.log("Server run");
