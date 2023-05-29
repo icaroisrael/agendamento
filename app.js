@@ -34,10 +34,27 @@ app.post('/cadastro/usuario', (req, res) => {
 //INCLUE NA VERSÃO NOVA A PESQUISA USANDO O HANDLEBARS
 app.get('/pesquisar', (req, res) =>{
     Usuario.findAll().then((dados) =>{
-        res.render('usuarios', {usuarios:dados})
+        res.render('usuarios', {usuarios:dados, title: 'Usuários'})
     })
 })
-//
+//V4 - EXCLUIR
+app.get("/excluir/:cpf", (req, res) =>{
+    // Delete everyone named "Jane"
+    Usuario.destroy({
+        where: {
+          cpf: req.params.cpf
+        }
+      }).then(() =>{
+        res.redirect("/pesquisar")
+      });
+    
+})
+
+//v5 - EDITAR
+app.get('/update/:cpf', (req, res) =>{
+    res.send("CPF" + req.params.cpf);
+})
+
 
 app.listen(3000, ()=>{
     console.log("Server run");
