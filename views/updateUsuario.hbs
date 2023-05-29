@@ -1,0 +1,11 @@
+<form method="post" action="/update/{{user.cpf}}/{{user.nome}}">
+    <label for="">Cpf:</label>
+    <input type="text" name="cpf" value="{{user.cpf}}" readonly>
+    <label for="">Nome:</label>
+    <input type="text" name="nome" value="{{user.nome}}">
+    <label for="">Email:</label>
+    <input type="text" name="email" value="{{user.email}}">
+    <label for="">senha</label>
+    <input type="password" name="senha" value="{{user.senha}}">
+    <input type="submit" value="Editar">
+</form>

@@ -50,10 +50,28 @@ app.get("/excluir/:cpf", (req, res) =>{
     
 })
 
-//v5 - EDITAR
-app.get('/update/:cpf', (req, res) =>{
-    res.send("CPF" + req.params.cpf);
+//INICIO DA DA V5 QUE EDITA UM USUÁRIO
+
+app.post('/update/:cpf/:nome', (req, res) =>{
+  Usuario.update(
+      {nome: req.body.nome},
+      {where: {cpf: req.body.cpf}}
+  ).then(() =>{
+      res.redirect('/pesquisar')
+  })
 })
+app.get("/update/:cpf", async (req,res)=>{
+  const {cpf} = req.params; 
+  const user = await Usuario.findOne({
+      where:{
+          cpf
+      }
+  });
+  return res.render("updateUsuario", {user})
+})
+
+//FIM DA VERSÃO 5 QUE EDITA UM USUÁRIO
+
 
 
 app.listen(3000, ()=>{
